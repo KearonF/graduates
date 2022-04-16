@@ -52,6 +52,15 @@ jobs:
       - name: Install packages
         run: yarn install --frozen-lockfile
 
+        #runs backend
+      - name: Runs backend
+        run: yarn start:db
+        start: yarn start:api
+
+      - name: Ready Prisma
+        run: yarn prisma:generate
+        yarn prisma:migrate:dev
+
       - name: Lint test affected
         if: ${{ inputs.testtype == 'lint' && inputs.test == 'affected' }}
         run: yarn nx affected:lint --base=${{ env.NX_BASE }} --head=${{ env.NX_HEAD }}
