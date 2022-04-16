@@ -59,7 +59,7 @@ jobs:
 
       - name: Ready Prisma
         run: yarn prisma:generate
-        yarn prisma:migrate:dev
+        run: yarn prisma:migrate:dev
 
       - name: Lint test affected
         if: ${{ inputs.testtype == 'lint' && inputs.test == 'affected' }}
